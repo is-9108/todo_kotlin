@@ -10,7 +10,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener{
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+
+        fab.setOnClickListener{
             println("tap")
             val intent = Intent(this, SubActivity::class.java)
             startActivity(intent)
