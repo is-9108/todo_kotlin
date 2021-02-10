@@ -15,7 +15,7 @@ class AddTodo {
                 "date" to date
         )
 
-        db.collection("users")
+        db.collection("todo")
                 .add(todoData)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
