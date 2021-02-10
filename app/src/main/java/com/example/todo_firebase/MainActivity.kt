@@ -18,15 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
 
-        val listView = findViewById<ListView>(R.id.todoList)
-
-        val list = show()
-
-
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list)
-        listView.adapter = adapter
-
-
+        show()
 
         fab.setOnClickListener{
             println("tap")
@@ -36,28 +28,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun show() :List<String>{
+    fun show(){
+        val listView = findViewById<ListView>(R.id.todoList)
+
         val db = Firebase.firestore
         var list = mutableListOf<String>()
         db.collection("todo")
                 .get()
                 .addOnSuccessListener { result ->
                     for (document in result) {
-//                        Log.d(TAG, "${document.id} => ${document.data}")
                         println("${document.id}: ${document.data}" )
                         println((document.data).get("todo"))
                         println((document.data).get("date"))
                         list.add((document.data).get("todo") as String)
                         println("LIST: ${list}")
                     }
+                    val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list)
+                    listView.adapter = adapter
                 }
                 .addOnFailureListener { exception ->
-//                    Log.d(TAG, "Error getting documents: ", exception)
                     println("Error getting documents: ${exception}")
                 }
-        println(list)
-        return list
     }
+
 }
 
 
