@@ -24,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        show()
+    }
+
     fun show(){
         val listView = findViewById<ListView>(R.id.todoList)
 
